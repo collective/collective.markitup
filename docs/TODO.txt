@@ -1,0 +1,7 @@
+There's lots to do!
+===================
+
+- Add support for adding images.
+- Test and fix bugs in browsers, particularly since this product is currently only being tested in Firefox 4.
+- Add more todos!
+

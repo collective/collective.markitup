@@ -1,0 +1,11 @@
+<configure
+	xmlns="http://namespaces.zope.org/zope"
+	xmlns:browser="http://namespaces.zope.org/browser"
+	i18n_domain="collective.markitup">
+
+	<browser:view
+		name="preview_transform"
+		class=".preview.Transform"
+		permission="cmf.ModifyPortalContent"
+	/>
+</configure>

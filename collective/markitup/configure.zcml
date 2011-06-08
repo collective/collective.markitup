@@ -1,0 +1,42 @@
+<configure
+	xmlns="http://namespaces.zope.org/zope"
+	xmlns:five="http://namespaces.zope.org/five"
+	xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+	xmlns:cmf="http://namespaces.zope.org/cmf"
+	xmlns:browser="http://namespaces.zope.org/browser"
+	i18n_domain="collective.markitup">
+
+	<five:registerPackage package="." initialize=".initialize" />
+	
+	<genericsetup:registerProfile
+		name="default"
+		directory="profiles/default"
+		title="MarkItUp Editor"
+		description="collective.markitup integrates MarkItUp with Plone"
+		provides="Products.GenericSetup.interfaces.EXTENSION"
+	/>
+
+	<!--
+	FIXME: Uninstall profiles cause install not to work.
+	<genericsetup:registerProfile
+		name="uninstall"
+		directory="profiles/uninstall"
+		title="MarkItUp Editor (uninstall)"
+		description="collective.markitup integrates MarkItUp with Plone"
+		provides="Products.GenericSetup.interfaces.EXTENSION"
+	/>
+	<genericsetup:importStep
+		name="uninstall"
+		title="Uninstall MarkItUp Editor"
+		description="collective.markitup integrates MarkItUp with Plone"
+		handler="collective.markitup.setuphandlers.uninstallSteps" />
+	/>
+	-->
+
+	<browser:resourceDirectory
+		name="collective.markitup"
+		directory="static"
+	/>
+
+	<include package=".browser" />
+</configure>

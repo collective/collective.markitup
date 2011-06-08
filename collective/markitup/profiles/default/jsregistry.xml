@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts" meta_type="JavaScripts Registry">
+<javascript id="++resource++collective.markitup/init.js" cacheable="True" compression="full" cookable="True" conditionalcomment="" enabled="True" inline="False"
+expression="python:(portal.portal_membership.getAuthenticatedMember().getProperty('wysiwyg_editor') or portal.portal_properties.site_properties.getProperty('default_editor')) == 'MarkItUp'"
+/>
+<!-- adjustments necessary until dev.plone.org/plone/ticket/11556 is fixed -->
+<javascript id="tiny_mce_init.js" authenticated="False" expression="python:(portal.portal_membership.getAuthenticatedMember().getProperty('wysiwyg_editor') or portal.portal_properties.site_properties.getProperty('default_editor')) == 'TinyMCE'" />
+<javascript id="tiny_mce.js" authenticated="False" expression="python:(portal.portal_membership.getAuthenticatedMember().getProperty('wysiwyg_editor') or portal.portal_properties.site_properties.getProperty('default_editor')) == 'TinyMCE'" />
+</object>

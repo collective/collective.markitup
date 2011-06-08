@@ -1,0 +1,39 @@
+collective.markitup
+============
+
+0.1 - Unreleased
+----------------
+
+ - Added a somewhat crappy way to apply the page styles to the preview.
+   It's crappy, but it's faster that causing Plone to load a full-template page.
+   [msmith64]
+
+ - Used portal_url defined in plone_javascript_variables.js to find root path
+   to objects.
+   [msmith64]
+ 
+ - Removed unneeded template.
+ - Previewer can pick between reStructuredText, Markdown, Textile,
+   (and HTML, which is a no-op).
+ - Auto-loads based on chosen content-type.
+ - Needed resources load on-the-fly, so very little needs to be in the Plone
+   registries.
+ - Added plugins for Textile and Rest as well as more robust HTML.
+ - Simple, unobtrusive default look.
+   [msmith64]
+
+ - Added proof-of-concept AJAX preview view of Markdown transform.
+   [msmith64]
+
+ - Tweaked GS profile so that user preferences are respected.
+   TinyMCE, I'm talking to you.
+   [msmith64]
+
+ - Added MarkItUp JQuery plugin and registered resources in basic GS profile.
+   [msmith64]
+
+ - Added MarkItUp to available editors in control panel.
+   [msmith64]
+
+ - Initial setup
+   [msmith64]

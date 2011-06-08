@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<import-steps>
+	<import-step
+		id="markitup-uninstall"
+		version="2011-06-02"
+		handler="collective.markitup.setuphandlers.uninstallSteps"
+		title="Uninstall MarkItUp final steps"
+	>
+		Final MarkItUp uninstall steps
+	</import-step>
+</import-steps>
