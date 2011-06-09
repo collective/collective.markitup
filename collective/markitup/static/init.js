@@ -21,13 +21,16 @@ markitup = {
 		$("#markItUpText").replaceWith($("#text"));
 	},
 	doPreviewStyles: function() {
-		console.log("doPreviewStyles called.")
+		console.log("doPreviewStyles called.");
 		var frame_head = $(".markItUpPreviewFrame").contents()[0].head;
 		for (var j=0; j<document.styleSheets.length; j++) {
 			var ss = document.styleSheets.item(j).ownerNode.cloneNode(true);
 			console.log("Appending ", ss, "to", frame_head);
 			frame_head.appendChild(ss);
 		}
+	},
+	findItUp: function(a) {
+		alert("findItUp called.");
 	},
 	currentSet: "",
 	setEditor: function(text_format) {
@@ -44,11 +47,17 @@ markitup = {
 				console.log("right before the thing");
 				for (var i=0; i<mySettings.markupSet.length; i++) {
 					console.log("Searching for preview");
-					if (mySettings.markupSet[i].name == "Preview") {
-						console.log("Found preview");
-						mySettings.markupSet[i].afterInsert = function() {
-							window.setTimeout(markitup.doPreviewStyles, 100);
-						}
+					parts: switch (mySettings.markupSet[i].name) {
+						case "Preview":
+							console.log("Found preview button.");
+							mySettings.markupSet[i].afterInsert = function() {
+								window.setTimeout(markitup.doPreviewStyles, 100);
+							}
+							break parts;
+						case "Picture":
+							console.log("Found picture button.");
+							mySettings.markupSet[i].beforeInsert = markitup.findItUp;
+							break parts;
 					}
 				}
 				$("#text").markItUp(mySettings);

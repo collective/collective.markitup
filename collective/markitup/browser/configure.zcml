@@ -1,10 +1,19 @@
 <configure
 	xmlns="http://namespaces.zope.org/browser"
 	i18n_domain="collective.markitup">
+
 	<page
 		name="preview_transform"
 		for="*"
 		class=".preview.Transform"
 		permission="cmf.ModifyPortalContent"
 	/>
+
+	<page
+		for="*"
+		name="plone_markitupfinder"
+		class=".markitup_finder.MarkItUpFinder"
+		permission="zope2.View"
+	/>
+
 </configure>
