@@ -4,7 +4,13 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Improved preview styles so loading them isn't quite as crappy.
+   Still crappy though
+ - Some cleanup/whitespace pedantry
+   [msmith64]
+
  - Depends on collective.plonefinder
+   [msmith64]
 
  - Added a somewhat crappy way to apply the page styles to the preview.
    It's crappy, but it's faster that causing Plone to load a full-template page.

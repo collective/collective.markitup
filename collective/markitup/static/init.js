@@ -1,33 +1,26 @@
 markitup = {
 	loadScript: function(url) {
 		if ($('script[src="'+url+'"]').length > 0) return;
-		var script=document.createElement('script');
-		script.type='text/javascript';
-		script.src=url;
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = url;
 		$("head").append(script);
 	},
 	loadStyle: function(url) {
 		if ($('link[href="'+url+'"]').length > 0) return;
-		var style=document.createElement("link");
-		style.rel="stylesheet";
-		style.type="text/css";
-		style.media="screen";
-		style.href=url;
-		$("head").append(style);
+		var style = document.getElementById("markitup-style");
+		if (!style) style = document.createElement("link");
+		style.id = "markitup-style";
+		style.rel = "stylesheet";
+		style.type = "text/css";
+		style.media = "screen";
+		style.href = url;
+		document.head.appendChild(style);
 	},
 	unload: function() {
 		// Note: some bug makes it difficult to unload the js and css directly,
 		//       hopefully leaving those in place won't break anything.
-		$("#markItUpText").replaceWith($("#text"));
-	},
-	doPreviewStyles: function() {
-		console.log("doPreviewStyles called.");
-		var frame_head = $(".markItUpPreviewFrame").contents()[0].head;
-		for (var j=0; j<document.styleSheets.length; j++) {
-			var ss = document.styleSheets.item(j).ownerNode.cloneNode(true);
-			console.log("Appending ", ss, "to", frame_head);
-			frame_head.appendChild(ss);
-		}
+		$("#text").markItUpRemove();
 	},
 	findItUp: function(a) {
 		alert("findItUp called.");
@@ -38,30 +31,27 @@ markitup = {
 		switch (text_format) {
 			case "Markdown":
 				// FIXME: Find a safe way to get the path.
-				markitup.loadScript(portal_url + "/++resource++collective.markitup/markdown/set.js");
-				markitup.loadStyle(portal_url + "/++resource++collective.markitup/markdown/style.css");
-				mySettings['previewAutoRefresh'] = true;
-				delete mySettings['previewTemplatePath'];
-				mySettings['previewParserVar'] = "markdown";
-				mySettings['previewParserPath'] = portal_url + '/@@preview_transform';
-				console.log("right before the thing");
+				markitup.loadScript(
+					portal_url + "/++resource++collective.markitup/markdown/set.js"
+				);
+				markitup.loadStyle(
+					portal_url + "/++resource++collective.markitup/markdown/style.css"
+				);
+				mySettings.previewAutoRefresh = true;
+				delete mySettings.previewTemplatePath;
+				mySettings.previewParserVar = "markdown";
+				mySettings.previewParserPath = portal_url + '/@@preview_transform';
+				console.log("Searching for markupSets.");
 				for (var i=0; i<mySettings.markupSet.length; i++) {
-					console.log("Searching for preview");
-					parts: switch (mySettings.markupSet[i].name) {
-						case "Preview":
-							console.log("Found preview button.");
-							mySettings.markupSet[i].afterInsert = function() {
-								window.setTimeout(markitup.doPreviewStyles, 100);
-							}
-							break parts;
-						case "Picture":
-							console.log("Found picture button.");
-							mySettings.markupSet[i].beforeInsert = markitup.findItUp;
-							break parts;
+					// HACK: Buttons are defined in an array; Loop to override.
+					var curSet = mySettings.markupSet[i];
+					if (curSet.name == "Picture") {
+						console.log("Found picture button.");
+						curSet.beforeInsert = markitup.findItUp;
 					}
 				}
 				$("#text").markItUp(mySettings);
-				markitup.currentSet="markdown";
+				markitup.currentSet = "markdown";
 				break;
 			case "Textile":
 				// FIXME: Find a safe way to get the path.
