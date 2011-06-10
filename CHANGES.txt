@@ -4,6 +4,8 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Depends on collective.plonefinder
+
  - Added a somewhat crappy way to apply the page styles to the preview.
    It's crappy, but it's faster that causing Plone to load a full-template page.
    [msmith64]
