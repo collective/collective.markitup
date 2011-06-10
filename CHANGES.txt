@@ -4,6 +4,10 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Improved preview styles even more so that they don't need HTTP requests.
+   Now the only crappiness is the amount of Javascript needed to get it done.
+   [msmith64]
+
  - Improved preview styles so loading them isn't quite as crappy.
    Still crappy though
  - Some cleanup/whitespace pedantry
