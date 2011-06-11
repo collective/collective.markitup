@@ -2,6 +2,11 @@ from Acquisition import aq_inner
 from zope.app.component.hooks import getSite
 from collective.plonefinder.browser.finder import Finder as FinderBase
 
+__credits__ = """
+This finder is largely modeled after collective.ckeditor's finder. Indeed, it
+is a fork of it, if you look at svn history.
+"""
+
 class Finder(FinderBase):
 	"""
 	Custom Finder class for MarkItUp Editor
