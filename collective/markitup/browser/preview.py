@@ -18,7 +18,7 @@ class Transform(BrowserView):
 				<title>Preview</title>
 				<script type="text/javascript" src="%s"></script>
 			</head>
-			<body>%s</body>
+			<body><div id="content">%s</div></body>
 		</html>
 	"""
 
