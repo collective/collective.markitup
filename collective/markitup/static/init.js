@@ -24,12 +24,16 @@ markitup = {
 		$("#text").markItUpRemove();
 	},
 	findItUp: function(a) {
+		console.log("findItUp");
 		var a = $(".Picture");
 		a.attr("href", portal_url+"/@@markitup_finder");
-		a.prepOverlay()
+		a.unbind("click").prepOverlay({
+			subtype: "iframe"
+		});
 	},
 	currentSet: "",
 	setEditor: function(text_format) {
+		if (!(text_format && typeof text_format != "undefined")) return false;
 		var subtype = text_format.split("/")[1];
 		markitup.unloadSet();
 		markitup.loadScript(markitup.base+subtype+"/set.js");
@@ -43,6 +47,7 @@ markitup = {
 			var curSet = mySettings.markupSet[i];
 			if (curSet.name == "Picture") {
 				curSet.className = "Picture";
+				delete curSet.replaceWith;
 				curSet.beforeInsert = markitup.findItUp;
 			}
 		}
@@ -55,6 +60,7 @@ $(document).ready(function() {
 	markitup.loadScript(markitup.base+"markitup/jquery.markitup.js");
 	markitup.setEditor($("#text_text_format :selected").val());
 	$("#text_text_format").change(function(e) {
-		markitup.setEditor($(this).find(":selected").val());
+		var text_format = $(this).find(":selected").val();
+		markitup.setEditor(text_format);
 	});
 });
