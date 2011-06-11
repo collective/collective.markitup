@@ -4,6 +4,11 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Added documentation to init.js.
+ - Wrapper to hide the ugly loop that MarkItUp requires in order to
+   override individual buttons.
+   [msmith64]
+
  - Much cleaner way of doing the transforms for previews.
    Safe, fast, and readable. MarkUpSet directories have to be named after
    the subtype (secondhalf of the mimetype).

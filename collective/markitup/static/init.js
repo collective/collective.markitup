@@ -1,5 +1,36 @@
+// $Id: $
+
+//
+//  Initialize MarkItUp Editor
+//
+//  This script contains the settings and overrides for an implementation
+//  of MarkItUp as an editor within Plone. In essence it changes the
+//  <textarea id="text"/> element on Plone pages into a MarkItUp WYSIWYM
+//  editor.
+//
+//  To add support for another markup language, download its pack from
+//  http://markitup.jaysalvat.com/downloads and unzip it into
+//  static/{set_name} without modification. If overrides or customization are
+//  needed, add them into this file.
+//
+//  For information about the editor itself please see
+//  http://markitup.jaysalvat.com/.
+//
+
+// A namespace for anything to do with the MarkItUp editor.
 markitup = {
+
+	// The URL from which to load resources
 	base: portal_url + "/++resource++collective.markitup/",
+
+	// An identifier for the currently-loaded editor's markupSet
+	currentSet: "",
+
+	/**
+	 * Load javascript into the current page
+	 * by creating and attaching a script element.
+	 * @param url {string} Value of the src attribute of the element to create
+	 */
 	loadScript: function(url) {
 		if ($('script[src="'+url+'"]').length > 0) return;
 		var script = document.createElement('script');
@@ -7,6 +38,12 @@ markitup = {
 		script.src = url;
 		$("head").append(script);
 	},
+
+	/**
+	 * Load css into the current page by
+	 * creating and attaching a style element.
+	 * @param url {string} Value of the href attribute of the element to create
+	 */
 	loadStyle: function(url) {
 		if ($('link[href="'+url+'"]').length > 0) return;
 		var style = document.getElementById("markitup-style");
@@ -18,20 +55,72 @@ markitup = {
 		style.href = url;
 		document.head.appendChild(style);
 	},
+
+	/**
+	 * Detach the MarkItUp editor from the $("#text") element.
+	 */
 	unloadSet: function() {
-		// Note: some bug makes it difficult to unload the js and css directly,
-		//       hopefully leaving those in place won't break anything.
+		/* NOTE: Unloading the js and css directly appears to cause problems.
+		         Hopefully leaving them in place won't break anything.
+		*/
 		$("#text").markItUpRemove();
 	},
-	findItUp: function(a) {
-		console.log("findItUp");
-		var a = $(".Picture");
-		a.attr("href", portal_url+"/@@markitup_finder");
-		a.unbind("click").prepOverlay({
-			subtype: "iframe"
-		});
+
+	// A namespace for anything having to do with the finder/browser/picker
+	finder: {
+		/**
+		 * Open the finder in a new window.
+		 */
+		open: function() {
+			/* HACK: Would rather do this as an iframe in the current window, but
+			         collective.plonefinder and plone.app.jquerytools are not
+			         friends.
+			*/
+			window.open(portal_url+"/@@markitup_finder");
+		}
+		
 	},
-	currentSet: "",
+	
+	/**
+	 * Override the button or key markupSets in the global mySettings.
+	 * Name is required. Anything else you do not explicitly unset
+	 * will be left as-is.
+	 * @param newSets {object} An associative array of markupSets.
+	 *        http://markitup.jaysalvat.com/documentation/#markupset
+	 * @example markitup.overrideSets({
+	 *            Picture: {
+	 *              replaceWith: null,
+	 *              className: "Picture",
+	 *              beforeInsert: markitup.finder.open
+	 *            }
+	 *          })
+	 *          This example call should find the markupSet with a name of
+	 *          "Picture" and replace its "replaceWith", "className", and
+	 *          "beforeInsert" properties with the specified references.
+	 */
+	overrideSets: function(newSets) {
+		for (var i=0; i<mySettings.markupSet.length; i++) {
+			// HACK: MarkItUp specifies that that the markupSets are in a
+			//       numeric array, not a hash indexed by name. Thus: Loop.
+			var curSet = mySettings.markupSet[i];
+			if (curSet.name in newSets) {
+				var newSet = newSets[curSet.name];
+				for (var key in newSet) {
+					// Directly delete references to null.
+					if (newSet[key] === null) {
+						delete curSet[key];
+					} else {
+						curSet[key] = newSet[key];
+					}
+				}
+			}
+		}
+	},
+
+	/**
+	 * Change the editor based on the id of the current format.
+	 * @param text_format {string} Name of the format to which to switch
+	 */
 	setEditor: function(text_format) {
 		if (!(text_format && typeof text_format != "undefined")) return false;
 		var subtype = text_format.split("/")[1];
@@ -42,20 +131,20 @@ markitup = {
 		mySettings.previewAutoRefresh = true;
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
-		for (var i=0; i<mySettings.markupSet.length; i++) {
-			// HACK: Buttons are defined in an array; Loop to override.
-			var curSet = mySettings.markupSet[i];
-			if (curSet.name == "Picture") {
-				curSet.className = "Picture";
-				delete curSet.replaceWith;
-				curSet.beforeInsert = markitup.findItUp;
+		markitup.overrideSets({
+			Picture: {
+				replaceWith: null,
+				className: "Picture",
+				beforeInsert: markitup.finder.open
 			}
-		}
+		});
 		$("#text").markItUp(mySettings);
 		markitup.currentSet = subtype;
 	}
 }
 
+// Attach MarkItUp editor to the JQuery object with an id of "#text", which
+// corresponds to the body editor in a normal Plone page.
 $(document).ready(function() {
 	markitup.loadScript(markitup.base+"markitup/jquery.markitup.js");
 	markitup.setEditor($("#text_text_format :selected").val());
