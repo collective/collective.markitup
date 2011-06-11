@@ -4,6 +4,11 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Much cleaner way of doing the transforms for previews.
+   Safe, fast, and readable. MarkUpSet directories have to be named after
+   the subtype (secondhalf of the mimetype).
+   [msmith64]
+
  - Improved preview styles by adding <div id="content"/> around the
    content to be previewed.
    [msmith64]

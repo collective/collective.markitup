@@ -24,37 +24,37 @@ markitup = {
 		$("#text").markItUpRemove();
 	},
 	findItUp: function(a) {
-		console.log("findItUp called.");
-		
+		var a = $(".Picture");
+		a.attr("href", portal_url+"/@@markitup_finder");
+		a.prepOverlay()
 	},
 	currentSet: "",
 	setEditor: function(text_format) {
-		if (text_format == "reStructured Text") text_format = "rest";
-		markitup.unload();
-		markitup.loadScript(markitup.base+text_format+"/set.js");
-		markitup.loadStyle(markitup.base+text_format+"/style.css");
+		var subtype = text_format.split("/")[1];
+		markitup.unloadSet();
+		markitup.loadScript(markitup.base+subtype+"/set.js");
+		markitup.loadStyle(markitup.base+subtype+"/style.css");
 		delete mySettings.previewTemplatePath;
 		mySettings.previewAutoRefresh = true;
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
-		console.log("Searching for markupSets.");
 		for (var i=0; i<mySettings.markupSet.length; i++) {
 			// HACK: Buttons are defined in an array; Loop to override.
 			var curSet = mySettings.markupSet[i];
 			if (curSet.name == "Picture") {
-				console.log("Found picture button.");
+				curSet.className = "Picture";
 				curSet.beforeInsert = markitup.findItUp;
 			}
 		}
 		$("#text").markItUp(mySettings);
-		markitup.currentSet = text_format;
+		markitup.currentSet = subtype;
 	}
 }
 
 $(document).ready(function() {
 	markitup.loadScript(markitup.base+"markitup/jquery.markitup.js");
-	markitup.setEditor($("#text_text_format :selected").text());
+	markitup.setEditor($("#text_text_format :selected").val());
 	$("#text_text_format").change(function(e) {
-		markitup.setEditor($(this).find(":selected").text());
+		markitup.setEditor($(this).find(":selected").val());
 	});
 });

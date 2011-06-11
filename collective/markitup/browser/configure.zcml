@@ -6,6 +6,7 @@
 		for="*"
 		class=".preview.Transform"
 		permission="cmf.ModifyPortalContent"
+		template="preview.pt"
 	/>
 
 	<page name="markitup_finder"
