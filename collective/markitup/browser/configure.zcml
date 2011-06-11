@@ -2,18 +2,16 @@
 	xmlns="http://namespaces.zope.org/browser"
 	i18n_domain="collective.markitup">
 
-	<page
-		name="preview_transform"
+	<page name="markitup_preview"
 		for="*"
 		class=".preview.Transform"
 		permission="cmf.ModifyPortalContent"
 	/>
 
-	<page
+	<page name="markitup_finder"
 		for="*"
-		name="plone_markitupfinder"
-		class=".markitup_finder.MarkItUpFinder"
-		permission="zope2.View"
+		class=".finder.Finder"
+		permission="cmf.ModifyPortalContent"
 	/>
 
 </configure>
