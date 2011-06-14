@@ -4,6 +4,12 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Got the images to appear in the editor. archetypes_tool doesn't want to 
+   give me a usable page from a UID, so I hacked a view that gives a 301
+   for any given UID that points to a real page. Not ideal, but at least now
+   the image button actually works.
+   [msmith64]
+
  - Got the plonefinder to show images. ("url" selectiontype broken: Must use
    uid.)
  - Create the Javascript override for plonefinder's Browser.selectItem

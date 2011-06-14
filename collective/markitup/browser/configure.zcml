@@ -15,4 +15,10 @@
 		permission="cmf.ModifyPortalContent"
 	/>
 
+	<page name="markitup_redirect_uid"
+		for="*"
+		class=".redirect.RedirectUID"
+		permission="cmf.ModifyPortalContent"
+	/>
+
 </configure>

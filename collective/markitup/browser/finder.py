@@ -13,7 +13,7 @@ class Finder(FinderBase):
 		self.allowaddfolder = True
 		self.typeview = 'image'
 		self.types = 'Image'
-		self.selectiontype = 'uid' # url is the other option. It's broken.
+		self.selectiontype = 'url' # url is the other option. It's broken.
 		self.jsaddons = "Browser.selectItem = markitup.finder.selectItem;"
 		# HACK: !important - this is just for testing
 		self.cssaddons = ".closeWindow { display: none !important; }"

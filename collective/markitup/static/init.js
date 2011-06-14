@@ -89,21 +89,21 @@ markitup = {
 		 * and then closes the iframe.
 		 */
 		selectItem: function (UID, title, image_preview) {
-			console.log(arguments);
+			var statusBar = $(".statusBar > div", Browser.window);
 			var parent = window.parent;
 			if (window.opener) parent = window.opener;
-			$('.statusBar>div',Browser.window).hide().filter('#msg-loading').show();
-			var fieldid = getBrowserData(Browser.formData, 'fieldid');
-			if (typeof parent.finderSelectItem !='undefined') {
-				parent.finderSelectItem(UID, title, image_preview, fieldid);
+			statusBar.hide().filter('#msg-loading').show();
+			var alt = "![[![Alternative text]!]]";
+			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
+			parent.$.markItUp({
+				replaceWith: alt+"("+src+' "'+title+'")'
+			});
+			if (Browser.forcecloseoninsert) {
+				parent.markitup.finder.overlay.close();
 			} else {
-				if (typeof image_preview == "undefined" || !image_preview) {
-					console.log("Selected: " + UID + " for fieldid " + fieldid);
-				} else {
-					console.log("Selected a middle size image with this UID: " + UID + " for fieldid " + fieldid);
-				}
+				statusBar.hide('10000').filter('#msg-done').show();
+				jQuery('#msg-done').fadeOut(10000);
 			}
-			parent.markitup.finder.overlay.close();
 		}
 
 	},
