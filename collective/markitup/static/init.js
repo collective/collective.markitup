@@ -71,14 +71,41 @@ markitup = {
 		/**
 		 * Open the finder in a new window.
 		 */
-		open: function() {
-			/* HACK: Would rather do this as an iframe in the current window, but
-			         collective.plonefinder and plone.app.jquerytools are not
-			         friends.
-			*/
-			window.open(portal_url+"/@@markitup_finder");
-		}
+		open: function(buttonSet) {
+			var target = $("."+buttonSet.className+">a");
+			target.attr("href", portal_url+"/@@markitup_finder");
+			target.prepOverlay({
+				subtype: "iframe",
+				config: {
+					closeOnClick: false,
+				}
+			});
+			markitup.finder.overlay = target.data("overlay");
+		},
 		
+		/**
+		 * Override the selectItem method from collective.plonefinder so that
+		 * when the user selects an item MarkItUp knows what text to generate,
+		 * and then closes the iframe.
+		 */
+		selectItem: function (UID, title, image_preview) {
+			console.log(arguments);
+			var parent = window.parent;
+			if (window.opener) parent = window.opener;
+			$('.statusBar>div',Browser.window).hide().filter('#msg-loading').show();
+			var fieldid = getBrowserData(Browser.formData, 'fieldid');
+			if (typeof parent.finderSelectItem !='undefined') {
+				parent.finderSelectItem(UID, title, image_preview, fieldid);
+			} else {
+				if (typeof image_preview == "undefined" || !image_preview) {
+					console.log("Selected: " + UID + " for fieldid " + fieldid);
+				} else {
+					console.log("Selected a middle size image with this UID: " + UID + " for fieldid " + fieldid);
+				}
+			}
+			parent.markitup.finder.overlay.close();
+		}
+
 	},
 	
 	/**

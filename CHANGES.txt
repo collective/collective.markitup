@@ -4,6 +4,12 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Got the plonefinder to show images. ("url" selectiontype broken: Must use
+   uid.)
+ - Create the Javascript override for plonefinder's Browser.selectItem
+ - Much cleaner subclass of Finder.
+   [msmith64]
+
  - Added documentation to init.js.
  - Wrapper to hide the ugly loop that MarkItUp requires in order to
    override individual buttons.
