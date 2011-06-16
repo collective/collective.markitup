@@ -1,7 +1,6 @@
 There's lots to do!
 ===================
 
-- Add support for adding images.
 - Test and fix bugs in browsers, particularly since this product is currently only being tested in Firefox 4.
-- Add more todos!
-
+- Move the major configuration options to a configlet. Currently all hardcoded, mostly in javascript.
+- The selectItem/Image browser is too slow. Make it faster or pick another one.
