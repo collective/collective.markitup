@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<registry>
+	<record name="collective.markitup.formats">
+		<field type="plone.registry.field.Text">
+			<title>MarkItUp Editor Formatting</title>
+			<description>JSON describing how to format inserted text</description>
+		</field>
+		<value>{
+			"text/x-web-markdown": {
+				"Picture": "![[![{1}]!]]([![Url:!:{0}]!] '[![{2}]!]')",
+				"Link": "[{1}]([![Url:!:{0}]!] '[![{2}]!]')"
+			},
+			"text/x-web-textile": {
+				"Picture": "![![Source:!:http://]!]([![Alternative text]!])!",
+				"Link": "'([![Title]!])':[![Link:!:http://]!]"
+			}
+		}</value>
+	</record>
+	<record name="collective.markitup.overrides">
+		<field type="plone.registry.field.Text">
+			<title>MarkItUp Editor Javascript Overrides</title>
+			<description>JSON describing overrides for adding buttons to the default editor</description>
+		</field>
+		<value>{
+			"text/x-web-markdown": {
+				"Picture": {
+					"replaceWith": null,
+					"className": "Picture",
+					"beforeInsert": "markitup.finder.open"
+				},
+				"Link": {
+					"className": "Link",
+					"openWith": null,
+					"closeWith": null,
+					"placeHolder": null,
+					"beforeInsert": "markitup.finder.open"
+				}
+			}
+		}</value>
+	</record>
+</registry>
