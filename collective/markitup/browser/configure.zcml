@@ -9,6 +9,12 @@
 		template="preview.pt"
 	/>
 
+	<page name="markitup_imagefinder"
+		for="*"
+		class=".finder.ImageFinder"
+		permission="cmf.ModifyPortalContent"
+	/>
+
 	<page name="markitup_finder"
 		for="*"
 		class=".finder.Finder"

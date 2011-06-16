@@ -17,6 +17,15 @@
 //  http://markitup.jaysalvat.com/.
 //
 
+String.prototype.format = function() {
+	var formatted = this;
+	for (var i = 0; i < arguments.length; i++) {
+		var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+		formatted = formatted.replace(regexp, arguments[i]);
+	}
+	return formatted;
+};
+
 // A namespace for anything to do with the MarkItUp editor.
 markitup = {
 
@@ -25,6 +34,17 @@ markitup = {
 
 	// An identifier for the currently-loaded editor's markupSet
 	currentSet: "",
+
+	// jQuery.validator formats for various things in various languages
+	// If a format is a string, it will replace the selected text.
+	format: {
+		markdown: {
+			// [URL, alternative text, title]
+			image: '![[![{1}]!]]([![Url:!:{0}]!] "[![{2}]!]")',
+			// [URL, link text, title]
+			link: '[{1}]([![Url:!:{0}]!] "[![{2}]!]")'
+		}
+	},
 
 	/**
 	 * Load javascript into the current page
@@ -73,7 +93,12 @@ markitup = {
 		 */
 		open: function(buttonSet) {
 			var target = $("."+buttonSet.className+">a");
-			target.attr("href", portal_url+"/@@markitup_finder");
+			console.log(buttonSet, target);
+			if (buttonSet.name == "Picture") {
+				target.attr("href", portal_url+"/@@markitup_imagefinder");
+			} else {
+				target.attr("href", portal_url+"/@@markitup_finder");
+			}
 			target.prepOverlay({
 				subtype: "iframe",
 				config: {
@@ -82,22 +107,50 @@ markitup = {
 			});
 			markitup.finder.overlay = target.data("overlay");
 		},
-		
+
+		/**
+		 * Override the selectImage method from collective.plonefinder so that
+		 * when the user selects an image MarkItUp knows what text to generate,
+		 * and then closes the iframe.
+		 */
+		selectImage: function (UID, title) {
+			var statusBar = $(".statusBar > div", Browser.window);
+			var parent = window.parent;
+			if (window.opener) parent = window.opener;
+			statusBar.hide().filter('#msg-loading').show();
+			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
+			parent.$.markItUp({replaceWith:markitup.format.markdown.image.format(
+				src,
+				"Alternative text",
+				title
+			)});
+			if (Browser.forcecloseoninsert) {
+				parent.markitup.finder.overlay.close();
+			} else {
+				statusBar.hide('10000').filter('#msg-done').show();
+				jQuery('#msg-done').fadeOut(10000);
+			}
+		},
+
 		/**
 		 * Override the selectItem method from collective.plonefinder so that
 		 * when the user selects an item MarkItUp knows what text to generate,
 		 * and then closes the iframe.
 		 */
-		selectItem: function (UID, title, image_preview) {
+		selectItem: function (UID, title, selection) {
 			var statusBar = $(".statusBar > div", Browser.window);
 			var parent = window.parent;
 			if (window.opener) parent = window.opener;
+			parent.console.log(parent.$.markItUp.selection, selection, arguments);
 			statusBar.hide().filter('#msg-loading').show();
-			var alt = "![[![Alternative text]!]]";
-			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
-			parent.$.markItUp({
-				replaceWith: alt+"("+src+' "'+title+'")'
-			});
+			var href = portal_url+"/@@markitup_redirect_uid?uid="+UID;
+			parent.$.markItUp({replaceWith:function(a) {
+				return markitup.format.markdown.link.format(
+					href,
+					a.selection,
+					title
+				)
+			}});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();
 			} else {
@@ -162,6 +215,13 @@ markitup = {
 			Picture: {
 				replaceWith: null,
 				className: "Picture",
+				beforeInsert: markitup.finder.open
+			},
+			Link: {
+				className: "Link",
+				openWith: null,
+				closeWith: null,
+				placeHolder: null,
 				beforeInsert: markitup.finder.open
 			}
 		});
