@@ -37,12 +37,15 @@ markitup = {
 
 	// jQuery.validator formats for various things in various languages
 	// If a format is a string, it will replace the selected text.
+	//
+	// This is here for example only. It will be overridden by stuff
+	// in the plone registry.
 	format: {
 		markdown: {
 			// [URL, alternative text, title]
-			image: '![[![{1}]!]]([![Url:!:{0}]!] "[![{2}]!]")',
+			Picture: '![[![{1}]!]]([![Url:!:{0}]!] "[![{2}]!]")',
 			// [URL, link text, title]
-			link: '[{1}]([![Url:!:{0}]!] "[![{2}]!]")'
+			Link: '[{1}]([![Url:!:{0}]!] "[![{2}]!]")'
 		}
 	},
 
@@ -93,7 +96,6 @@ markitup = {
 		 */
 		open: function(buttonSet) {
 			var target = $("."+buttonSet.className+">a");
-			console.log(buttonSet, target);
 			if (buttonSet.name == "Picture") {
 				target.attr("href", portal_url+"/@@markitup_imagefinder");
 			} else {
@@ -119,7 +121,7 @@ markitup = {
 			if (window.opener) parent = window.opener;
 			statusBar.hide().filter('#msg-loading').show();
 			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
-			parent.$.markItUp({replaceWith:markitup.format.markdown.image.format(
+			parent.$.markItUp({replaceWith:markitup.format.Picture.format(
 				src,
 				"Alternative text",
 				title
@@ -141,11 +143,10 @@ markitup = {
 			var statusBar = $(".statusBar > div", Browser.window);
 			var parent = window.parent;
 			if (window.opener) parent = window.opener;
-			parent.console.log(parent.$.markItUp.selection, selection, arguments);
 			statusBar.hide().filter('#msg-loading').show();
 			var href = portal_url+"/@@markitup_redirect_uid?uid="+UID;
 			parent.$.markItUp({replaceWith:function(a) {
-				return markitup.format.markdown.link.format(
+				return markitup.format.Link.format(
 					href,
 					a.selection,
 					title
@@ -158,9 +159,8 @@ markitup = {
 				jQuery('#msg-done').fadeOut(10000);
 			}
 		}
-
 	},
-	
+
 	/**
 	 * Override the button or key markupSets in the global mySettings.
 	 * Name is required. Anything else you do not explicitly unset
@@ -178,7 +178,10 @@ markitup = {
 	 *          "Picture" and replace its "replaceWith", "className", and
 	 *          "beforeInsert" properties with the specified references.
 	 */
-	overrideSets: function(newSets) {
+	overrideSets: function(data) {
+		var set_name = "text/" + markitup.currentSet;
+		var newSets = data[set_name];
+		console.log("newSets:", newSets);
 		for (var i=0; i<mySettings.markupSet.length; i++) {
 			// HACK: MarkItUp specifies that that the markupSets are in a
 			//       numeric array, not a hash indexed by name. Thus: Loop.
@@ -190,11 +193,25 @@ markitup = {
 					if (newSet[key] === null) {
 						delete curSet[key];
 					} else {
-						curSet[key] = newSet[key];
+						var splitval = newSet[key].split(".");
+						
+						if (splitval.length<1) {
+							curSet[key] = newSet[key];
+						} else {
+							
+							if (splitval[0] == "markitup") {
+								curSet[key] = markitup[splitval[1]]
+								console.log(newSet[key].split("."));
+							}
+						}
 					}
 				}
 			}
 		}
+	},
+	
+	setFormats: function(data, textStatus, jqXHR) {
+		console.log("setFormats", data, textStatus, jqXHR, arguments);
 	},
 
 	/**
@@ -211,22 +228,12 @@ markitup = {
 		mySettings.previewAutoRefresh = true;
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
-		markitup.overrideSets({
-			Picture: {
-				replaceWith: null,
-				className: "Picture",
-				beforeInsert: markitup.finder.open
-			},
-			Link: {
-				className: "Link",
-				openWith: null,
-				closeWith: null,
-				placeHolder: null,
-				beforeInsert: markitup.finder.open
-			}
-		});
-		$("#text").markItUp(mySettings);
 		markitup.currentSet = subtype;
+		console.log("Getting overrides from", portal_url + "/@@markitup_json");
+		$.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets );
+		// console.log("Getting formats from", portal_url + "/@@markitup_json");
+		// $.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
+		$("#text").markItUp(mySettings);
 	}
 }
 

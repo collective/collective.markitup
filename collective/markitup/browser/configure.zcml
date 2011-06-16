@@ -26,5 +26,11 @@
 		class=".redirect.RedirectUID"
 		permission="cmf.ModifyPortalContent"
 	/>
+	
+	<page name="markitup_json"
+		for="*"
+		class=".json.getJSON"
+		permission="cmf.ModifyPortalContent"
+	/>
 
 </configure>

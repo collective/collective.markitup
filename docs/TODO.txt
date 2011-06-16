@@ -1,6 +1,8 @@
 There's lots to do!
 ===================
 
-- Test and fix bugs in browsers, particularly since this product is currently only being tested in Firefox 4.
+- Test and fix bugs in browsers. While it seems to work in IE9, I'm pretty
+  sure there's some IE7/8 unfriendly code in the init.js
 - Move the major configuration options to a configlet. Currently all hardcoded, mostly in javascript.
-- The selectItem/Image browser is too slow. Make it faster or pick another one.
+- The selectItem/Image browser is too slow. Make it faster or pick another
+  picker.
