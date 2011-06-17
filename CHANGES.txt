@@ -4,6 +4,9 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - getSite() is cleaner than getUtility()
+   [msmith64]
+
  - Registry component so you can add settings for any markup language.
    Currently takes JSON, so it's a mess, but it's something.
    [msmith64]
