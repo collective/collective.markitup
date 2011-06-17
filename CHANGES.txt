@@ -4,6 +4,10 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Registry component so you can add settings for any markup language.
+   Currently takes JSON, so it's a mess, but it's something.
+   [msmith64]
+ 
  - Browse to add links via the finder; however, now I have to go back
    and figure out how folks can add external links, too.
 

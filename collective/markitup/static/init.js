@@ -41,11 +41,11 @@ markitup = {
 	// This is here for example only. It will be overridden by stuff
 	// in the plone registry.
 	format: {
-		markdown: {
-			// [URL, alternative text, title]
-			Picture: '![[![{1}]!]]([![Url:!:{0}]!] "[![{2}]!]")',
-			// [URL, link text, title]
-			Link: '[{1}]([![Url:!:{0}]!] "[![{2}]!]")'
+		"text/x-web-markdown": {
+		// [URL, alternative text, title]
+		Picture: '![[![{1}]!]]([![Url:!:{0}]!] "[![{2}]!]")',
+		// [URL, link text, title]
+		Link: '[{1}]([![Url:!:{0}]!] "[![{2}]!]")'
 		}
 	},
 
@@ -121,11 +121,10 @@ markitup = {
 			if (window.opener) parent = window.opener;
 			statusBar.hide().filter('#msg-loading').show();
 			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
-			parent.$.markItUp({replaceWith:markitup.format.Picture.format(
-				src,
-				"Alternative text",
-				title
-			)});
+			var formatStr = markitup.format["text/"+markitup.currentSet].Picture;
+			parent.$.markItUp({
+				replaceWith:formatStr.format(src, "Alternative text", title)
+			});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();
 			} else {
@@ -146,11 +145,8 @@ markitup = {
 			statusBar.hide().filter('#msg-loading').show();
 			var href = portal_url+"/@@markitup_redirect_uid?uid="+UID;
 			parent.$.markItUp({replaceWith:function(a) {
-				return markitup.format.Link.format(
-					href,
-					a.selection,
-					title
-				)
+				var formatStr = markitup.format["text/"+parent.markitup.currentSet].Link;
+				return formatStr.format(href, a.selection, title)
 			}});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();
@@ -178,10 +174,9 @@ markitup = {
 	 *          "Picture" and replace its "replaceWith", "className", and
 	 *          "beforeInsert" properties with the specified references.
 	 */
-	overrideSets: function(data) {
+	overrideSets: function(data, textStatus, jqXHR) {
 		var set_name = "text/" + markitup.currentSet;
 		var newSets = data[set_name];
-		console.log("newSets:", newSets);
 		for (var i=0; i<mySettings.markupSet.length; i++) {
 			// HACK: MarkItUp specifies that that the markupSets are in a
 			//       numeric array, not a hash indexed by name. Thus: Loop.
@@ -189,34 +184,31 @@ markitup = {
 			if (curSet.name in newSets) {
 				var newSet = newSets[curSet.name];
 				for (var key in newSet) {
-					// Directly delete references to null.
 					if (newSet[key] === null) {
+						// Directly delete references to null.
 						delete curSet[key];
 					} else {
-						var splitval = newSet[key].split(".");
-						
-						if (splitval.length<1) {
-							curSet[key] = newSet[key];
-						} else {
-							
-							if (splitval[0] == "markitup") {
-								curSet[key] = markitup[splitval[1]]
-								console.log(newSet[key].split("."));
-							}
-						}
+						// HACK: Attempt to "guess" if a dotted name is intended to be a
+						//       reference to a Javascript object and not merely a string.
+						//       If only JSON had support for arbitrary references.
+						var ctx = window;
+						// NOTE: Loop has no body. Do everything in the loop expression.
+						for (var s=newSet[key].split("."); ctx&&s.length; ctx=ctx[s.shift()]);
+						curSet[key] = ctx||newSet[key];
 					}
 				}
 			}
 		}
+		$("#text").markItUp(mySettings);
 	},
 	
 	setFormats: function(data, textStatus, jqXHR) {
-		console.log("setFormats", data, textStatus, jqXHR, arguments);
+		markitup.format = data["text/" + markitup.currentSet];
 	},
 
 	/**
-	 * Change the editor based on the id of the current format.
-	 * @param text_format {string} Name of the format to which to switch
+	 * Change the editor based on the id of the current markup.
+	 * @param text_format {string} Name of the markup to which to switch
 	 */
 	setEditor: function(text_format) {
 		if (!(text_format && typeof text_format != "undefined")) return false;
@@ -229,11 +221,9 @@ markitup = {
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
 		markitup.currentSet = subtype;
-		console.log("Getting overrides from", portal_url + "/@@markitup_json");
+		$.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
 		$.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets );
-		// console.log("Getting formats from", portal_url + "/@@markitup_json");
-		// $.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
-		$("#text").markItUp(mySettings);
+		
 	}
 }
 
