@@ -1,7 +1,7 @@
 window.onload = function() {
 	var parentdoc_ss = window.parent.document.styleSheets;
 	if (document.styleSheets.length < 1) {
-		document.head.appendChild(document.createElement("style"));
+		document.getElementsByTagName('head')[0].appendChild(document.createElement("style"));
 	}
 	var ss = document.styleSheets[document.styleSheets.length-1];
 	var rule_index = 0;

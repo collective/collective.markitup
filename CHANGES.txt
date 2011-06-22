@@ -3,6 +3,8 @@ collective.markitup
 
 0.1 - Unreleased
 ----------------
+ - Added nazmd support
+   [fvox13]
 
  - getSite() is cleaner than getUtility()
    [msmith64]

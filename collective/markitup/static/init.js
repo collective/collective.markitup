@@ -76,7 +76,7 @@ markitup = {
 		style.type = "text/css";
 		style.media = "screen";
 		style.href = url;
-		document.head.appendChild(style);
+		$("head").append(style);
 	},
 
 	/**
