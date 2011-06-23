@@ -3,6 +3,10 @@ collective.markitup
 
 0.1 - Unreleased
 ----------------
+
+ - FIXED: MarkItUp fails to load when no override is specified.
+   [msmith64]
+
  - Added nazmd support
    [fvox13]
 

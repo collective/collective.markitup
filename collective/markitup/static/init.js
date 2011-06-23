@@ -86,7 +86,8 @@ markitup = {
 		/* NOTE: Unloading the js and css directly appears to cause problems.
 		         Hopefully leaving them in place won't break anything.
 		*/
-		$("#text").markItUpRemove();
+		// $("#text").markItUpRemove();
+		$("textarea").markItUpRemove();
 	},
 
 	// A namespace for anything having to do with the finder/browser/picker
@@ -176,30 +177,33 @@ markitup = {
 	 */
 	overrideSets: function(data, textStatus, jqXHR) {
 		var set_name = "text/" + markitup.currentSet;
-		var newSets = data[set_name];
-		for (var i=0; i<mySettings.markupSet.length; i++) {
-			// HACK: MarkItUp specifies that that the markupSets are in a
-			//       numeric array, not a hash indexed by name. Thus: Loop.
-			var curSet = mySettings.markupSet[i];
-			if (curSet.name in newSets) {
-				var newSet = newSets[curSet.name];
-				for (var key in newSet) {
-					if (newSet[key] === null) {
-						// Directly delete references to null.
-						delete curSet[key];
-					} else {
-						// HACK: Attempt to "guess" if a dotted name is intended to be a
-						//       reference to a Javascript object and not merely a string.
-						//       If only JSON had support for arbitrary references.
-						var ctx = window;
-						// NOTE: Loop has no body. Do everything in the loop expression.
-						for (var s=newSet[key].split("."); ctx&&s.length; ctx=ctx[s.shift()]);
-						curSet[key] = ctx||newSet[key];
+		if (set_name in data) {
+			var newSets = data[set_name];
+			for (var i=0; i<mySettings.markupSet.length; i++) {
+				// HACK: MarkItUp specifies that that the markupSets are in a
+				//       numeric array, not a hash indexed by name. Thus: Loop.
+				var curSet = mySettings.markupSet[i];
+				if (curSet.name in newSets) {
+					var newSet = newSets[curSet.name];
+					for (var key in newSet) {
+						if (newSet[key] === null) {
+							// Directly delete references to null.
+							delete curSet[key];
+						} else {
+							// HACK: Attempt to "guess" if a dotted name is intended to be a
+							//       reference to a Javascript object and not merely a string.
+							//       If only JSON had support for arbitrary references.
+							var ctx = window;
+							// NOTE: Loop has no body. Do everything in the loop expression.
+							for (var s=newSet[key].split("."); ctx&&s.length; ctx=ctx[s.shift()]);
+							curSet[key] = ctx||newSet[key];
+						}
 					}
 				}
 			}
 		}
 		$("#text").markItUp(mySettings);
+		$("textarea[id=form.text]").markItUp(mySettings);
 	},
 	
 	setFormats: function(data, textStatus, jqXHR) {
@@ -223,12 +227,11 @@ markitup = {
 		markitup.currentSet = subtype;
 		$.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
 		$.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets );
-		
 	}
 }
 
-// Attach MarkItUp editor to the JQuery object with an id of "#text", which
-// corresponds to the body editor in a normal Plone page.
+// Attach MarkItUp editor to the main textarea on the body of a Plone edit
+// form.
 $(document).ready(function() {
 	markitup.loadScript(markitup.base+"markitup/jquery.markitup.js");
 	markitup.setEditor($("#text_text_format :selected").val());
