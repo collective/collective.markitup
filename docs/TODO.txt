@@ -1,6 +1,7 @@
 There's lots to do!
 ===================
 
+- Automatically install PloneFinder
 - Test and fix bugs in browsers. While it seems to work in IE9, I'm pretty
   sure there's some IE7/8 unfriendly code in the init.js
 - Move the major configuration options to a configlet. Currently all hardcoded, mostly in javascript.
