@@ -147,7 +147,7 @@ markitup = {
 			statusBar.hide().filter('#msg-loading').show();
 			var href = portal_url+"/@@markitup_redirect_uid?uid="+UID;
 			parent.$.markItUp({replaceWith:function(a) {
-				var formatStr = markitup.format.Link;
+				var formatStr = parent.markitup.format.Link;
 				return formatStr.format(href, a.selection, title)
 			}});
 			if (Browser.forcecloseoninsert) {
