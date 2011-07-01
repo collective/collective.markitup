@@ -4,6 +4,10 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - FIXED: Image/Link picker fails because format string no longer specified
+   in JSON.
+   [msmith64]
+
  - FIXED: MarkItUp fails to load when no override is specified.
    [msmith64]
 

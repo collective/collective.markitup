@@ -122,7 +122,8 @@ markitup = {
 			if (window.opener) parent = window.opener;
 			statusBar.hide().filter('#msg-loading').show();
 			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
-			var formatStr = markitup.format["text/"+markitup.currentSet].Picture;
+			parent.console.log(parent.markitup.format);
+			var formatStr = parent.markitup.format.Picture;
 			parent.$.markItUp({
 				replaceWith:formatStr.format(src, "Alternative text", title)
 			});
@@ -146,7 +147,7 @@ markitup = {
 			statusBar.hide().filter('#msg-loading').show();
 			var href = portal_url+"/@@markitup_redirect_uid?uid="+UID;
 			parent.$.markItUp({replaceWith:function(a) {
-				var formatStr = markitup.format["text/"+parent.markitup.currentSet].Link;
+				var formatStr = markitup.format.Link;
 				return formatStr.format(href, a.selection, title)
 			}});
 			if (Browser.forcecloseoninsert) {
