@@ -6,5 +6,5 @@
 		<title>Preview</title>
 		<script type="text/javascript" tal:attributes="src view/js"></script>
 	</head>
-	<body><div id="content" tal:content="structure view/content"></div></body>
+	<body><div id="visual-portal-wrapper"><div id="content-core" tal:content="structure view/content"></div></div></body>
 </html>
