@@ -122,7 +122,7 @@ markitup = {
 			if (window.opener) parent = window.opener;
 			statusBar.hide().filter('#msg-loading').show();
 			var src = portal_url+"/@@markitup_redirect_uid?uid="+UID;
-			parent.console.log(parent.markitup.format);
+//			parent.console.log(parent.markitup.format);
 			var formatStr = parent.markitup.format.Picture;
 			parent.$.markItUp({
 				replaceWith:formatStr.format(src, "Alternative text", title)
