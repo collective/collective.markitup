@@ -4,6 +4,9 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Dependency on jquerytools 1.2 or greater.
+   [msmith64]
+
  - FIXED: Image/Link picker fails because format string no longer specified
    in JSON.
    [msmith64]

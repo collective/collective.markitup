@@ -27,6 +27,7 @@ setup(
 	install_requires=[
 		'setuptools',
 		'collective.plonefinder',
+		'plone.app.jquerytools >= 1.2',
 	],
 	entry_points="""
 	# -*- Entry points: -*-
