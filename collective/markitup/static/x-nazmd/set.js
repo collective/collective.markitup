@@ -33,7 +33,6 @@ mySettings = {
 		{separator:'---------------'},
 		{name:'Table', className:"tbl", replaceWith:'\n| Column 1   | Column 2               | Column 3     |\n|------------|------------------------|--------------|\n| Things     | Milk                   | Pride        |\n| Stuff      | Eggs                   | Avarice      |\n| Junk       | Butter                 | Sloth        |\n| Crud       | Zesty Italian Dressing | Humility     |\n\n'},
 		{name:'Quotes', openWith:'> '},
-		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'},
 		{separator:'---------------'},
 		{name:'Show/Hide', className:"sh", replaceWith:'~naz:showhide\n\n## Show-Hide Heading ##\n\n### First Subheading ###\n\nYour text and stuff goes here.\n\n### Another Subheading ###\n\nMore of your text. You can even add *emphasized* and **strongly emphasized** text if that makes you happy.\n\n~/naz:showhide\n'},
 		{name:'Section Promo Boxes', className:"pb", replaceWith:'~naz:promoboxes\n\n* ### Promo Item 1 ####\n  Promotext line 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n* ### Promo Item 2 ###\n  Promotext line 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n\n~/naz:promoboxes\n'},
