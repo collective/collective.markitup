@@ -95,7 +95,7 @@ var markitup = {
 		style.type = "text/css";
 		style.media = "screen";
 		style.href = url;
-		document.head.appendChild(style);
+		jQuery("head").append(style);
 	},
 
 	/**
