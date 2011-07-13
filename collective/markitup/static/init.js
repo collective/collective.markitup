@@ -238,7 +238,8 @@ var markitup = {
 				}
 			}
 		}
-		jQuery("#text").markItUp(mySettings);
+		alert("Fnord.");
+		jQuery("#text, #formfield-form-text textarea").markItUp(mySettings);
 	},
 	
 	setFormats: function (data) {
@@ -264,6 +265,7 @@ var markitup = {
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
 		markitup.currentSet = subtype;
+		alert("Getting Jason");
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets);
 		
@@ -275,8 +277,8 @@ var markitup = {
 jQuery(document).ready(function () {
 	"use strict";
 	markitup.loadScript(markitup.base + "markitup/jquery.markitup.js");
-	markitup.setEditor(jQuery("#text_text_format :selected").val());
-	jQuery("#text_text_format").change(function () {
+	markitup.setEditor(jQuery("#text_text_format :selected, #formfield-form-markup select").val());
+	jQuery("#text_text_format, #formfield-form-markup select").change(function () {
 		var text_format = jQuery(this).find(":selected").val();
 		markitup.setEditor(text_format);
 	});
