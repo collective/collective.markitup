@@ -238,7 +238,6 @@ var markitup = {
 				}
 			}
 		}
-		alert("Fnord.");
 		jQuery("#text, #formfield-form-text textarea").markItUp(mySettings);
 	},
 	
@@ -265,7 +264,6 @@ var markitup = {
 		mySettings.previewParserVar = text_format;
 		mySettings.previewParserPath = portal_url + '/@@markitup_preview';
 		markitup.currentSet = subtype;
-		alert("Getting Jason");
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets);
 		
