@@ -35,7 +35,7 @@ mySettings = {
 		{name:'Quotes', openWith:'> '},
 		{separator:'---------------'},
 		{name:'Show/Hide', className:"sh", replaceWith:'~naz:showhide\n\n## Show-Hide Heading ##\n\n### First Subheading ###\n\nYour text and stuff goes here.\n\n### Another Subheading ###\n\nMore of your text. You can even add *emphasized* and **strongly emphasized** text if that makes you happy.\n\n~/naz:showhide\n'},
-		{name:'Section Promo Boxes', className:"pb", replaceWith:'~naz:promoboxes\n\n* ### Promo Item 1 ####\n  Promotext line 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n* ### Promo Item 2 ###\n  Promotext line 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n\n~/naz:promoboxes\n'},
+		{name:'Section Promo Boxes', className:"pb", replaceWith:'~naz:promoboxes\n\n* ### Promo Item 1 ####\n  Promotext line 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n\n* ### Promo Item 2 ###\n  Promotext line 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n\n~/naz:promoboxes\n'},
 		{name:'Quick Info', className:"qi", replaceWith:'~naz:quickinfo\n\n## Quick Info ##\nMajor\n: Accounting\n\nHometown\n: Springfield, USA\n\n~/naz:quickinfo\n'},
 		{name:'Tasks/Resources', className:"tr", replaceWith:'~naz:tasks\n\n## Tasks/Resources ##\n\n* Request Info\n* Explore our majors\n* Make bacon\n\n~/naz:tasks\n'},
 		{separator:'---------------'},
