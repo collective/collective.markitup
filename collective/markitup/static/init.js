@@ -141,8 +141,8 @@ var markitup = {
 			var Browser = Browser || {},
 				statusBar = jQuery(".statusBar > div", Browser.window),
 				parent = window.parent,
-				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID,
-				formatStr = markitup.formatStr["text/" + markitup.currentSet].Picture;
+				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
+				var formatStr = parent.markitup.formatStr.Picture;
 			if (window.opener) {
 				parent = window.opener;
 			}
@@ -174,7 +174,7 @@ var markitup = {
 			}
 			statusBar.hide().filter('#msg-loading').show();
 			parent.jQuery.markItUp({replaceWith: function (a) {
-				var formatStr = markitup.formatStr["text/" + parent.markitup.currentSet].Link;
+				var formatStr = parent.markitup.formatStr.Link;
 				return formatStr.format(href, a.selection, title);
 			}});
 			if (Browser.forcecloseoninsert) {
@@ -229,6 +229,7 @@ var markitup = {
 							// HACK: Attempt to "guess" if a dotted name is intended to be a
 							//       reference to a Javascript object and not merely a string.
 							//       If only JSON had support for arbitrary references.
+							var ctx = window;
 							for (s = newSet[key].split("."); ctx && s.length;) {
 								ctx = ctx[s.shift()];
 							}
