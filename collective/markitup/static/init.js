@@ -122,12 +122,18 @@ var markitup = {
 			} else {
 				target.attr("href", portal_url + "/@@markitup_finder");
 			}
-			target.prepOverlay({
-				subtype: "iframe",
-				config: {
-					closeOnClick: false
-				}
-			});
+			if (target.data("overlay") == undefined) {
+				// p.a.jquerytools deletes __all__ click handlers for iframe
+				// overlays when prepOverlay is called, including this one :)
+				// Do not prep the overlay a second time.
+				console.log('prepping the overlay');
+				target.prepOverlay({
+					subtype: "iframe",
+					config: {
+						closeOnClick: false
+					}
+				});
+			}
 			markitup.finder.overlay = target.data("overlay");
 		},
 
