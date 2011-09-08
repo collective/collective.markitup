@@ -126,7 +126,6 @@ var markitup = {
 				// p.a.jquerytools deletes __all__ click handlers for iframe
 				// overlays when prepOverlay is called, including this one :)
 				// Do not prep the overlay a second time.
-				//console.log('prepping the overlay');
 				target.prepOverlay({
 					subtype: "iframe",
 					config: {
