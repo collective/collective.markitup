@@ -42,7 +42,7 @@
 	background-image:url(images/link.png);
 }
 
-.markItUp .markItUpButton13 a	{
+.markItUp .quotes a	{
 	background-image:url(images/quotes.png);
 }
 .markItUp .markItUpButton14 a	{
@@ -77,4 +77,7 @@
 }
 .markItUp .tbl a{
 	background-image:url(images/table.png);
+}
+.markItUp .extlink a{
+	background-image:url(images/globe.gif);
 }
