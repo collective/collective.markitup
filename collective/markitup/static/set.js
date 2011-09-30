@@ -129,7 +129,7 @@ markdown = {
 			return markItUp.line+'. ';
 		}},
 		{separator:'---------------'},
-		{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'},
+		{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!] {class=image-[![Alignment]!]]}([![Url:!:http://]!]/image_[![Scale]!] "[![Title]!]")'},
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...'},
 		{separator:'---------------'},	
 		{name:'Quotes', openWith:'> '},

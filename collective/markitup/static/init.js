@@ -147,13 +147,16 @@ var markitup = {
 				statusBar = jQuery(".statusBar > div", Browser.window),
 				parent = window.parent,
 				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
-				var formatStr = parent.markitup.formatStr.Picture;
+				formatStr = parent.markitup.formatStr.Picture;
+				altTextPrompt = "Enter alternative text describing the image:"
+				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb')"
+				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right')"
 			if (window.opener) {
 				parent = window.opener;
 			}
 			statusBar.hide().filter('#msg-loading').show();
 			parent.jQuery.markItUp({
-				replaceWith: formatStr.format(src, "Alternative text", title)
+				replaceWith: formatStr.format(src, altTextPrompt, title, scalePrompt, alignPrompt)
 			});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();
