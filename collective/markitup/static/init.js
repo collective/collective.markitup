@@ -148,15 +148,16 @@ var markitup = {
 				parent = window.parent,
 				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
 				formatStr = parent.markitup.formatStr.Picture;
-				altTextPrompt = "Enter alternative text describing the image:"
-				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb')"
-				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right')"
+				altTextPrompt = "Enter alternative text describing the image:";
+				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb'):";
+				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right'):";
+				titlePrompt = "Image Title (this will appear in the tooltip for the image)::!:" + title;
 			if (window.opener) {
 				parent = window.opener;
 			}
 			statusBar.hide().filter('#msg-loading').show();
 			parent.jQuery.markItUp({
-				replaceWith: formatStr.format(src, altTextPrompt, title, scalePrompt, alignPrompt)
+				replaceWith: formatStr.format(src, altTextPrompt, titlePrompt, scalePrompt, alignPrompt)
 			});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();
@@ -177,13 +178,14 @@ var markitup = {
 				statusBar = jQuery(".statusBar > div", Browser.window),
 				parent = window.parent,
 				href = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
+				titlePrompt = "Link Title (this will appear in the tooltip for the link)::!:" + title;
 			if (window.opener) {
 				parent = window.opener;
 			}
 			statusBar.hide().filter('#msg-loading').show();
 			parent.jQuery.markItUp({replaceWith: function (a) {
 				var formatStr = parent.markitup.formatStr.Link;
-				return formatStr.format(href, a.selection, title);
+				return formatStr.format(href, a.selection, titlePrompt);
 			}});
 			if (Browser.forcecloseoninsert) {
 				parent.markitup.finder.overlay.close();

@@ -4,6 +4,18 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Removed magicMarkup prompt for URL in link and image sets, it is redundant
+   and confusing to have to see it
+   [cewing]
+
+ - Improved prompting information for magicMarkups in init.js to clarify the
+   purpose of these prompts for end users
+   [cewing]
+
+ - Added image scales and image alignment classes for the image set overrides.
+   Included sensible defaults for both.
+   [cewing]
+
  - Dependency on jquerytools 1.2 or greater.
    [msmith64]
 
