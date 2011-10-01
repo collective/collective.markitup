@@ -9,6 +9,7 @@ class Finder(FinderBase):
 		super(Finder, self).__init__(context, request)
 		self.findername = 'markitup_finder'
 		self.multiselect = False
+		self.forcecloseoninsert = 1
 		self.selectiontype = 'uid' # url is the other option. It's broken.
 		self.jsaddons = "Browser.selectItem = markitup.finder.selectItem;"
 		# HACK: !important - this is just for testing
@@ -24,6 +25,8 @@ class ImageFinder(Finder):
 	def __init__(self, context, request):
 		super(ImageFinder, self).__init__(context, request)
 		self.findername = 'markitup_imagefinder'
+		self.multiselect = False
+		self.forcecloseoninsert = 1
 		self.allowupload = True
 		self.allowaddfolder = True
 		self.typeview = 'image'

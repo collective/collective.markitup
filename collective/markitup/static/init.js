@@ -135,6 +135,24 @@ var markitup = {
 			}
 			markitup.finder.overlay = target.data("overlay");
 		},
+		
+		/**
+		 * Read the value of forcecloseoninsert set by the 
+		 * collective.plonefinder Browser instance in the popup overlay
+		 */
+		forcecloseoninsert: function () {
+			"use strict";
+			var parent, overlay, content, fcoi;
+			parent = window.parent;
+			if (parent.markitup.finder.overlay != undefined) {
+				overlay = parent.markitup.finder.overlay.getOverlay();
+				content = overlay.find('iframe').contents();
+				fcoi = parseInt(content.find('#forcecloseoninsert').val());
+			} else {
+				fcoi = 0;
+			}
+			return fcoi;
+		},
 
 		/**
 		 * Override the selectImage method from collective.plonefinder so that
@@ -146,11 +164,11 @@ var markitup = {
 			var Browser = Browser || {},
 				statusBar = jQuery(".statusBar > div", Browser.window),
 				parent = window.parent,
-				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
-				formatStr = parent.markitup.formatStr.Picture;
-				altTextPrompt = "Enter alternative text describing the image:";
-				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb'):";
-				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right'):";
+				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID,
+				formatStr = parent.markitup.formatStr.Picture,
+				altTextPrompt = "Enter alternative text describing the image:",
+				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb'):",
+				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right'):",
 				titlePrompt = "Image Title (this will appear in the tooltip for the image)::!:" + title;
 			if (window.opener) {
 				parent = window.opener;
@@ -159,7 +177,7 @@ var markitup = {
 			parent.jQuery.markItUp({
 				replaceWith: formatStr.format(src, altTextPrompt, titlePrompt, scalePrompt, alignPrompt)
 			});
-			if (Browser.forcecloseoninsert) {
+			if (parent.markitup.finder.forcecloseoninsert()) {
 				parent.markitup.finder.overlay.close();
 			} else {
 				statusBar.hide('10000').filter('#msg-done').show();
@@ -187,7 +205,7 @@ var markitup = {
 				var formatStr = parent.markitup.formatStr.Link;
 				return formatStr.format(href, a.selection, titlePrompt);
 			}});
-			if (Browser.forcecloseoninsert) {
+			if (parent.markitup.finder.forcecloseoninsert()) {
 				parent.markitup.finder.overlay.close();
 			} else {
 				statusBar.hide('10000').filter('#msg-done').show();
