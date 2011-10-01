@@ -16,6 +16,10 @@ collective.markitup
    Included sensible defaults for both.
    [cewing]
 
+ - Auto-close the finder window opened for image and link buttons, if the
+   plonefinder has forcecloseoninsert set to 1.
+   [cewing]
+
  - Dependency on jquerytools 1.2 or greater.
    [msmith64]
 
