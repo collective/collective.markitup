@@ -30,7 +30,7 @@ mySettings = {
 		{separator:'---------------' },
 		{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'},
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
-		{name:'External Link', key:'W', className:"extlink", openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
+		{name:'External Link', key:'W', className:"extlink", openWith:'[', closeWith:']([![URL:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
 		{separator:'---------------'},
 		{name:'Table', className:"tbl", replaceWith:'\n| Column 1   | Column 2               | Column 3     |\n|------------|------------------------|--------------|\n| Things     | Milk                   | Pride        |\n| Stuff      | Eggs                   | Avarice      |\n| Junk       | Butter                 | Sloth        |\n| Crud       | Zesty Italian Dressing | Humility     |\n\n'},
 		{name:'Quotes', className:"quotes", openWith:'> '},
