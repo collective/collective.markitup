@@ -195,7 +195,7 @@ var markitup = {
 			var Browser = Browser || {},
 				statusBar = jQuery(".statusBar > div", Browser.window),
 				parent = window.parent,
-				href = portal_url + "/@@markitup_redirect_uid?uid=" + UID;
+				href = portal_url + "/@@markitup_redirect_uid?uid=" + UID,
 				titlePrompt = "Link Title (this will appear in the tooltip for the link)::!:" + title;
 			if (window.opener) {
 				parent = window.opener;
