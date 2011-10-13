@@ -24,7 +24,7 @@
 	<page name="markitup_redirect_uid"
 		for="*"
 		class=".redirect.RedirectUID"
-		permission="cmf.ModifyPortalContent"
+		permission="zope2.View"
 	/>
 	
 	<page name="markitup_json"
