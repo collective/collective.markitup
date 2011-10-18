@@ -267,7 +267,8 @@ var markitup = {
 				}
 			}
 		}
-		jQuery("#text, #formfield-form-text textarea").markItUp(mySettings);
+		// rewrote this part to accomodate any AT Rich Widget text field.
+		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea").markItUp(mySettings);
 	},
 	
 	setFormats: function (data) {
