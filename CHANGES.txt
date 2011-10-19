@@ -4,6 +4,10 @@ collective.markitup
 0.1 - Unreleased
 ----------------
 
+ - Allow editor to apply to any AT Rich Text Field on an object, rather than
+   just to the body
+   [cewing]
+
  - Removed magicMarkup prompt for URL in link and image sets, it is redundant
    and confusing to have to see it
    [cewing]
