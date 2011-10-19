@@ -11,7 +11,7 @@ control panel.
 
 A word of warning
 -----------------
-This product is alpha. Use at your own risk.
+This product is beta. Use at your own risk.
 
 Installing
 ----------
