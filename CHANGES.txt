@@ -1,8 +1,8 @@
 collective.markitup
 ===================
 
-0.1 - Unreleased
-----------------
+0.1b1 - October 19. 2011
+------------------------
 
  - Allow editor to apply to any AT Rich Text Field on an object, rather than
    just to the body

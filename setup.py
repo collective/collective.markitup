@@ -13,7 +13,9 @@ setup(
 	classifiers=[
 		"Framework :: Plone",
 		"Programming Language :: Python",
+		"Programming Language :: JavaScript",
 		"Topic :: Software Development :: Libraries :: Python Modules",
+		"Topic :: Text Processing :: Markup",
 	 ],
 	keywords='web zope plone editor',
 	author='Michael A. Smith',
@@ -27,6 +29,7 @@ setup(
 	install_requires=[
 		'setuptools',
 		'collective.plonefinder',
+		'collective.quickupload',
 		'plone.app.jquerytools >= 1.2',
 	],
 	entry_points="""
