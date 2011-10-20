@@ -8,7 +8,7 @@ setup(
 	name='collective.markitup',
 	version=version,
 	description="collective.markitup integrates MarkItUp with Plone",
-	long_description=open("README.txt").read() + "\n" + open(os.path.join("docs", "HISTORY.txt")).read(),
+	long_description=open("README.txt").read() + "\n" + open("CHANGES.txt").read(),
 	# Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
 	classifiers=[
 		"Framework :: Plone",
