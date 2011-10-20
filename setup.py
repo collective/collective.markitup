@@ -20,7 +20,7 @@ setup(
 	keywords='web zope plone editor',
 	author='Michael A. Smith',
 	author_email='michael@smith-li.com',
-	url='http://smith-li.com',
+	url='http://dev.plone.org/collective/browser/collective.markitup',
 	license='MIT',
 	packages=find_packages(exclude=['ez_setup']),
 	namespace_packages=['collective'],
