@@ -1,5 +1,5 @@
 # encoding: utf-8
-from zope.app.component.hooks import getSite
+from zope.site.hooks import getSite
 from Products.Five.browser import BrowserView
 
 class Transform(BrowserView):
