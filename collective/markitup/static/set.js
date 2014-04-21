@@ -22,7 +22,7 @@ collective = {
 			var shiftKey = kwargs.shiftKey; // true if Shift key was pressed
 		},
 		exampleSet = {
-			nameSpace: "", // string: Apply a specific className to the wrapping Div. Useful to prevent CSS conflicts between instances. 
+			nameSpace: "", // string: Apply a specific className to the wrapping Div. Useful to prevent CSS conflicts between instances.
 			resizeHandle: true, // boolean: Enable/Disable the handle to resize the editor.
 			previewInWindow: "", // string: Display the preview in a popup window with comma-separated list of specs. If empty or false, the preview will be displayed in the built-in iFrame preview.
 			previewAutoRefresh: false, // boolean: AutoRefresh the preview iFrame or windown swhen the editor is used.
@@ -56,7 +56,7 @@ collective = {
 		Textile: null,
 		HTML: {
 			bold: {name:'Bold', key:'B', openWith:'(!(<strong>|!|<b>)!)', closeWith:'(!(</strong>|!|</b>)!)'},
-			clean: {name:'Clean', className:'clean', replaceWith:function(markitup) {return markitup.selection.replace(/<(.*?)>/g, "")}},		
+			clean: {name:'Clean', className:'clean', replaceWith:function(markitup) {return markitup.selection.replace(/<(.*?)>/g, "")}},
 			heading: [
 				{name:'Heading 1', key:'1', placeHolder:'Your title here…', openWith:"<h1>", closeWith:"</h1>"},
 				{name:'Heading 2', key:'2', placeHolder:'Your title here…', openWith:"<h2>", closeWith:"</h2>"},
@@ -65,7 +65,7 @@ collective = {
 				{name:'Heading 5', key:'5', placeHolder:'Your title here…', openWith:"<h5>", closeWith:"</h5>"},
 				{name:'Heading 6', key:'6', placeHolder:'Your title here…', openWith:"<h6>", closeWith:"</h6>"}
 			],
-			image: {name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />'},
+			image: {name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![...Alternative text]!]" />'},
 			italic: {name:'Italic', key:'I', openWith:'(!(<em>|!|<i>)!)', closeWith:'(!(</em>|!|</i>)!)' },
 			link: {name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...'},
 			list: {
@@ -120,7 +120,7 @@ markdown = {
 		{name:'Heading 4', key:'4', openWith:'#### ', placeHolder:'Your title here...'},
 		{name:'Heading 5', key:'5', openWith:'##### ', placeHolder:'Your title here...'},
 		{name:'Heading 6', key:'6', openWith:'###### ', placeHolder:'Your title here...'},
-		{separator:'---------------'},		
+		{separator:'---------------'},
 		{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
 		{name:'Italic', key:'I', openWith:'_', closeWith:'_'},
 		{separator:'---------------'},
@@ -131,7 +131,7 @@ markdown = {
 		{separator:'---------------'},
 		{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!] {class=image-[![Alignment]!]]}([![Url:!:http://]!]/image_[![Scale]!] "[![Title]!]")'},
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...'},
-		{separator:'---------------'},	
+		{separator:'---------------'},
 		{name:'Quotes', openWith:'> '},
 		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'},
 		{separator:'---------------'},

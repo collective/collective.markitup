@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------
 // markItUp!
 // -------------------------------------------------------------------
-// Copyright (C) 2011 Florent Gallaire <fgallaire@gmail.com>  
+// Copyright (C) 2011 Florent Gallaire <fgallaire@gmail.com>
 // License GNU GPLv3 or any later version.
 // Copyright (C) 2008 Jay Salvat
 // http://markitup.jaysalvat.com/
@@ -21,16 +21,16 @@ mySettings = {
 		{name:'Heading', key:'3', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '-') } },
 		{name:'Heading', key:'4', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '^') } },
 		{name:'Heading', key:'5', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '"') } },
-		{separator:'---------------' },		
-		{name:'Bold', key:'B', openWith:'**', closeWith:'**'}, 
-		{name:'Italic', key:'I', openWith:'*', closeWith:'*'}, 
 		{separator:'---------------' },
-		{name:'Bulleted list', openWith:'- '}, 
-		{name:'Numeric list', openWith:'# '}, 
+		{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
+		{name:'Italic', key:'I', openWith:'*', closeWith:'*'},
 		{separator:'---------------' },
-		{name:'Picture', key:'P', openWith:'\n\n.. image:: ', closeWith:'\n\n', placeHolder:'Your picture here...'}, 
+		{name:'Bulleted list', openWith:'- '},
+		{name:'Numeric list', openWith:'# '},
+		{separator:'---------------' },
+		{name:'Picture', key:'P', openWith:'\n\n.. figure:: ', closeWith:'\n\n', placeHolder:'Your picture here...'},
 		{name:'Link', key:'L', openWith:'`', closeWith:' [![Link:!:http://]!]`_', placeHolder:'Your text to link here...'},
-		{separator:'---------------'},	
+		{separator:'---------------'},
 		{name:'Quote', openWith:'\t'},
 		{name:'Code', openWith:'``', closeWith:'``'},
 		{separator:'---------------' },
