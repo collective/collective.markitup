@@ -6,7 +6,11 @@
 			<description>JSON describing how to format inserted text</description>
 		</field>
 		<value>{
-			"text/x-web-markdown": {
+      "text/restructured": {
+        "Picture": "{0}/image_[![{3}:!:preview]!] \n   :alt: [![{1}]!]\n   :align: [![{4}:!:right]!]\n\n   [![{2}]!]",
+        "Link": "[{1}]({0} '[![{2}]!]')"
+      },
+      "text/x-web-markdown": {
 				"Picture": "![[![{1}]!] {@class=image-[![{4}:!:left]!]}]({0}/image_[![{3}:!:preview]!] '[![{2}]!]')",
 				"Link": "[{1}]({0} '[![{2}]!]')"
 			},
@@ -26,7 +30,35 @@
 			<description>JSON describing overrides for adding buttons to the default editor</description>
 		</field>
 		<value>{
+			"text/restructured": {
+				"Picture": {
+					"replaceWith": null,
+					"className": "Picture",
+					"beforeInsert": "markitup.finder.open"
+				},
+				"Link": {
+					"className": "Link",
+					"openWith": null,
+					"closeWith": null,
+					"placeHolder": null,
+					"beforeInsert": "markitup.finder.open"
+				}
+			},
 			"text/x-web-markdown": {
+				"Picture": {
+					"replaceWith": null,
+					"className": "Picture",
+					"beforeInsert": "markitup.finder.open"
+				},
+				"Link": {
+					"className": "Link",
+					"openWith": null,
+					"closeWith": null,
+					"placeHolder": null,
+					"beforeInsert": "markitup.finder.open"
+				}
+			},
+			"text/x-web-textile": {
 				"Picture": {
 					"replaceWith": null,
 					"className": "Picture",
