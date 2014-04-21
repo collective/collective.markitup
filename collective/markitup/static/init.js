@@ -135,9 +135,9 @@ var markitup = {
 			}
 			markitup.finder.overlay = target.data("overlay");
 		},
-		
+
 		/**
-		 * Read the value of forcecloseoninsert set by the 
+		 * Read the value of forcecloseoninsert set by the
 		 * collective.plonefinder Browser instance in the popup overlay
 		 */
 		forcecloseoninsert: function () {
@@ -166,10 +166,13 @@ var markitup = {
 				parent = window.parent,
 				src = portal_url + "/@@markitup_redirect_uid?uid=" + UID,
 				formatStr = parent.markitup.formatStr.Picture,
-				altTextPrompt = "Enter alternative text describing the image:",
+				altTextPrompt = "Enter alternative text describing the image::!:" + title,
 				scalePrompt = "Scale (choose from 'large', 'preview', 'mini', 'thumb'):",
 				alignPrompt = "Alignment (choose from 'inline', 'left', or 'right'):",
 				titlePrompt = "Image Title (this will appear in the tooltip for the image)::!:" + title;
+      if (parent.markitup.currentSet === 'restructured'){
+        alignPrompt = "Alignment (choose from 'center', 'left', or 'right'):";
+      }
 			if (window.opener) {
 				parent = window.opener;
 			}
@@ -270,7 +273,7 @@ var markitup = {
 		// rewrote this part to accomodate any AT Rich Widget text field.
 		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea").markItUp(mySettings);
 	},
-	
+
 	setFormats: function (data) {
 		"use strict";
 		markitup.formatStr = data["text/" + markitup.currentSet];
@@ -296,7 +299,7 @@ var markitup = {
 		markitup.currentSet = subtype;
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "formats"}, markitup.setFormats);
 		jQuery.getJSON(portal_url + "/@@markitup_json", {"name": "overrides"}, markitup.overrideSets);
-		
+
 	}
 };
 
