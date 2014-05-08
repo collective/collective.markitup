@@ -8,7 +8,7 @@
 		<value>{
       "text/restructured": {
         "Picture": "{0}/image_[![{3}:!:preview]!] \n   :alt: [![{1}]!]\n   :align: [![{4}:!:right]!]\n\n   [![{2}]!]",
-        "Link": "[{1}]({0} '[![{2}]!]')"
+        "Link": "`{1} <{0}>`_"
       },
       "text/x-web-markdown": {
 				"Picture": "![[![{1}]!] {@class=image-[![{4}:!:left]!]}]({0}/image_[![{3}:!:preview]!] '[![{2}]!]')",
