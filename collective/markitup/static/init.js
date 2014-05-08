@@ -205,8 +205,15 @@ var markitup = {
 			}
 			statusBar.hide().filter('#msg-loading').show();
 			parent.jQuery.markItUp({replaceWith: function (a) {
-				var formatStr = parent.markitup.formatStr.Link;
-				return formatStr.format(href, a.selection, titlePrompt);
+				var formatStr = parent.markitup.formatStr.Link,
+          markedStr;
+
+        if(a.selection === ''){
+          markedStr = title;
+        }else{
+          markedStr = a.selection;
+        }
+				return formatStr.format(href, markedStr, titlePrompt);
 			}});
 			if (parent.markitup.finder.forcecloseoninsert()) {
 				parent.markitup.finder.overlay.close();
