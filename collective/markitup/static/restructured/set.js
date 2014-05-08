@@ -26,7 +26,7 @@ mySettings = {
 		{name:'Italic', key:'I', openWith:'*', closeWith:'*'},
 		{separator:'---------------' },
 		{name:'Bulleted list', openWith:'- '},
-		{name:'Numeric list', openWith:'# '},
+		{name:'Numeric list', openWith:'#. ', multiline:true },
 		{separator:'---------------' },
 		{name:'Picture', key:'P', openWith:'\n\n.. figure:: ', closeWith:'\n\n', placeHolder:'Your picture here...'},
 		{name:'Link', key:'L', openWith:'`', closeWith:' [![Link:!:http://]!]`_', placeHolder:'Your text to link here...'},
