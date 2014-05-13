@@ -32,7 +32,7 @@ mySettings = {
 		{name:'Link', key:'L', openWith:'`', closeWith:' [![Link:!:http://]!]`_', placeHolder:'Your text to link here...'},
 		{separator:'---------------'},
 		{name:'Quote', openWith:'\t'},
-		{name:'Code', openWith:'``', closeWith:'``'},
+		{name:'Code', openWith:'::\n\n   ', closeWith:''},
 		{separator:'---------------' },
 		{name:'Preview', call:'preview', className:'preview'}
 	]
