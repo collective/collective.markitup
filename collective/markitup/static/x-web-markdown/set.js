@@ -23,8 +23,8 @@ mySettings = {
 		{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
 		{name:'Italic', key:'I', openWith:'_', closeWith:'_'},
 		{separator:'---------------' },
-		{name:'Bulleted List', openWith:'- ' },
-		{name:'Numeric List', openWith:function(markItUp) {
+		{name:'Bulleted List', openWith:'- ', multiline: true },
+		{name:'Numeric List', multiline: true, openWith:function(markItUp) {
 			return markItUp.line+'. ';
 		}},
 		{separator:'---------------' },
