@@ -278,7 +278,7 @@ var markitup = {
 			}
 		}
 		// rewrote this part to accomodate any AT Rich Widget text field.
-		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea").markItUp(mySettings);
+		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea, div.richTextWidget textarea").markItUp(mySettings);
 	},
 
 	setFormats: function (data) {
@@ -315,8 +315,8 @@ var markitup = {
 jQuery(document).ready(function () {
 	"use strict";
 	markitup.loadScript(markitup.base + "markitup/jquery.markitup.js");
-	markitup.setEditor(jQuery("#text_text_format :selected, #formfield-form-markup select").val());
-	jQuery("#text_text_format, #formfield-form-markup select").change(function () {
+	markitup.setEditor(jQuery("#text_text_format :selected, #formfield-form-markup select, #form\\2ewidgets\\2etext_text_format").val());
+	jQuery("#text_text_format, #formfield-form-markup select, #form\\2ewidgets\\2etext_text_format").change(function () {
 		var text_format = jQuery(this).find(":selected").val();
 		markitup.setEditor(text_format);
 	});
