@@ -7,7 +7,7 @@
 	i18n_domain="collective.markitup">
 
 	<five:registerPackage package="." initialize=".initialize" />
-	
+
 	<genericsetup:registerProfile
 		name="default"
 		directory="profiles/default"
@@ -32,6 +32,8 @@
 		handler="collective.markitup.setuphandlers.uninstallSteps" />
 	/>
 	-->
+
+	<include file="upgrades.zcml" />
 
 	<browser:resourceDirectory
 		name="collective.markitup"

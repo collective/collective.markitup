@@ -1,0 +1,14 @@
+<configure
+ xmlns="http://namespaces.zope.org/zope"
+ xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:upgradeStep
+    source="*"
+    destination="1001"
+    title="Reload css registry"
+    description=""
+    profile="collective.markitup:default"
+    handler=".upgrades.upgrade_to_1001"
+    />
+
+</configure>

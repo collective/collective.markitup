@@ -1,4 +1,29 @@
 <?xml version="1.0"?>
 <object name="portal_css" meta_type="Stylesheets Registry">
-<stylesheet id="++resource++collective.markitup/simple/style.css" title="" enabled="on" media="screen" rel="stylesheet" rendering="link" cacheable="True" compression="full" cookable="True" conditionalcomment="" expression=""/>
+  <stylesheet
+    id="++resource++collective.markitup/simple/style.css"
+    title=""
+    enabled="on"
+    media="screen"
+    rel="stylesheet"
+    rendering="link"
+    cacheable="True"
+    compression="full"
+    cookable="True"
+    conditionalcomment=""
+    expression=""
+    />
+  <stylesheet
+    id="++resource++collective.markitup/plone/plone-integration.css"
+    title=""
+    enabled="on"
+    media="screen"
+    rel="stylesheet"
+    rendering="link"
+    cacheable="True"
+    compression="full"
+    cookable="True"
+    conditionalcomment=""
+    expression=""
+    />
 </object>
