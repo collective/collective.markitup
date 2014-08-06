@@ -5,14 +5,15 @@ import os
 version = open(
     os.path.join("collective", "markitup", "version.txt")).read().strip()
 
+long_description = (
+    open('README.txt').read() + '\n' +
+    open('CHANGES.txt').read()
+)
 setup(
     name='collective.markitup',
     version=version,
     description="collective.markitup integrates MarkItUp with Plone",
-    long_description=(
-        open("README.txt").read() + "\n"
-        + open(os.path.join("docs", "HISTORY.txt")).read()
-    ),
+    long_description=long_description,
     # Get more strings http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Framework :: Plone",

@@ -1,7 +1,28 @@
-collective.markitup
-===================
+
+CHANGES
+=======
+
 
 0.2 (2014-08-05)
+----------------
+
+ - escaped lt and gt characters, also bind to dexterity richTextWidget
+   [Manuel Reinhardt]
+
+ - fix many problems with restructuredText and some with Markdown, see commits for details
+   [MrTango]
+
+ - add dependencies for plonefinder and quickupload to metadata, to activate it on install
+   [MrTango]
+
+ - plone 4.3 compatibility fixes
+   [MrTango]
+
+ - setup test buildout
+   [MrTango]
+
+
+0.1 (2011-10-20)
 ----------------
 
  - Allow editor to apply to any AT Rich Text Field on an object, rather than
