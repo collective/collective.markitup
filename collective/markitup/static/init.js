@@ -277,6 +277,7 @@ var markitup = {
 				}
 			}
 		}
+		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea, div.richTextWidget textarea").markItUpRemove();
 		// rewrote this part to accomodate any AT Rich Widget text field.
 		jQuery("div.ArchetypesRichWidget textarea, #formfield-form-text textarea, div.richTextWidget textarea").markItUp(mySettings);
 	},

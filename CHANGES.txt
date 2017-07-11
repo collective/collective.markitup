@@ -3,6 +3,13 @@ CHANGES
 =======
 
 
+0.3 (unreleased)
+----------------
+
+- first call markItUpRemove when switching text formats. Fixes duplicated markup.
+  [reinhardt]
+
+
 0.2 (2014-08-05)
 ----------------
 
