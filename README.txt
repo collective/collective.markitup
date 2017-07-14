@@ -17,7 +17,7 @@ Installing
 ----------
 Install collective.markitup `just like any other Plone product`_.
 
-.. _just like any other Plone product: http://plone.org/documentation/kb/add-ons/installing
+.. _just like any other Plone product: http://docs.plone.org/manage/installing/installing_addons.html
 
 How to use collective.markitup
 ------------------------------
